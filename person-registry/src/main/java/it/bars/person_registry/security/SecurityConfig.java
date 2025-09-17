@@ -21,7 +21,7 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    // Legge gli URL consentiti dal file application.properties
+    
     @Value("${security.cors.urls}")
     private String[] allowedOrigins;
 

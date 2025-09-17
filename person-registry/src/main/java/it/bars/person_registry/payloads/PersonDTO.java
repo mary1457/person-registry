@@ -9,22 +9,22 @@ import jakarta.validation.constraints.Size;
 
 public record PersonDTO(
 
-        @NotBlank(message = "Tax code is required!")
+        @NotBlank(message = "{person.taxCode.required}")
         @Pattern(
                 regexp = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$",
-                message = "Invalid tax code format!"
+                message = "{person.taxCode.invalidFormat}"
         )
         String taxCode,
 
-        @NotBlank(message = "Name is required!")
-        @Size(min = 2, max = 40, message = "First name must be between 2 and 40 characters!")
+        @NotBlank(message = "{person.name.required}")
+        @Size(min = 2, max = 40, message = "{person.name.size}")
         String name,
 
-        @NotBlank(message = "Surname is required!")
-        @Size(min = 2, max = 40, message = "Surname must be between 2 and 40 characters!")
+        @NotBlank(message = "{person.surname.required}")
+        @Size(min = 2, max = 40, message = "{person.surname.size}")
         String surname,
 
-        @NotNull(message = "Address is required!")
+        @NotNull(message = "{person.address.required}")
         @Valid
         Address address
 ) {
