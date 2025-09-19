@@ -1,0 +1,82 @@
+Configuration:
+  name: Default
+  status: WARN
+
+  Properties:
+    Property:
+      - name: LOG_PATTERN
+        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+      - name: LOG_FILE_PATH
+        value: "./logs"
+
+  Appenders:
+    Console:
+      - name: Console
+        target: SYSTEM_OUT
+        PatternLayout:
+          pattern: "%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{[%thread]}{magenta} %clr{%-5level}{blue} %clr{%logger{36}}{cyan} %clr{-}{faint} %msg%n"
+
+    RollingFile:
+      - name: FileAppender
+        fileName: "${LOG_FILE_PATH}/person-registry.log"
+        filePattern: "${LOG_FILE_PATH}/person-registry-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "${LOG_PATTERN}"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:
+          max: 30
+
+  Loggers:
+    Logger:
+      - name: it.bars.person_registry
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+      - name: org.springframework.boot
+        level: INFO
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+      - name: org.springframework.web
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+      - name: org.hibernate
+        level: INFO
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+      - name: org.hibernate.SQL
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+      - name: org.springframework.security
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          - ref: Console
+          - ref: FileAppender
+
+    Root:
+      level: INFO
+      AppenderRef:
+        - ref: Console
+        - ref: FileAppender
