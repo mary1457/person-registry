@@ -1,11 +1,6 @@
 server:
   port: 8080
-  ssl:
-    enabled: true
-    key-store: classpath:registry.p12
-    key-store-password: "MySecret123"
-    key-store-type: PKCS12
-    key-alias: registry
+
 
 
 security:
@@ -24,8 +19,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: ${DDL_AUTO:update}
-    show-sql: ${SHOW_SQL:false}
+      ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -48,4 +43,3 @@ logging:
   config: classpath:log4j2.yaml
 
 
-REG_APP_LOG: ${REG_APP_LOG:./logs}

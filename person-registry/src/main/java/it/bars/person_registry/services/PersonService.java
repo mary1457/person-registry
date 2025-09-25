@@ -9,8 +9,7 @@ import it.bars.person_registry.repositories.AddressRepository;
 import it.bars.person_registry.repositories.PersonRepository;
 import it.bars.person_registry.security.MessageManager;
 import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,9 +20,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class PersonService {
-
-    private static final Logger log = LoggerFactory.getLogger(PersonService.class);
 
     @Autowired
     private PersonRepository personRepository;
@@ -36,7 +34,7 @@ public class PersonService {
 
     @PostConstruct
     public void init() {
-        log.info(messages.get("service.initialization.completed"));
+
     }
 
     public Person savePerson(PersonDTO personDTO) {
